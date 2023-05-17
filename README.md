@@ -29,7 +29,10 @@ customAlloc.poolSize = 24;
 ```c++
 PoolAllocator<T> pool( customAlloc );
 
+// Create and return a pointer to an object in the pool.
 T* newObject = pool.Create();
+
+// Free a pointer to an object in the pool.
 pool.Destroy(newObject);
 
 ```
