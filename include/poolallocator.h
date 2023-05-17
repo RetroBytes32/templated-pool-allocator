@@ -1,7 +1,7 @@
 //
 // Custom allocator pool class
 //
-// Author: SniperChicken
+// Author: David Penning
 
 #ifndef _POOL_ALLOCATOR_SUPPORT__
 #define _POOL_ALLOCATOR_SUPPORT__
