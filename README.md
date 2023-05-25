@@ -4,9 +4,26 @@ This approach reduces the need to keep asking the operating system for more memo
 
 
 <br><br/>
+### Using the allocator
+
+> You can pull objects from the pool using the create/destroy functions.
+
+> Note that the constructor and destructor are called internally.
+```c++
+PoolAllocator<T> pool();
+
+// Create and return a pointer to an object in the pool.
+T* newObject = pool.Create();
+
+// Free a pointer to an object in the pool.
+pool.Destroy(newObject);
+
+```
+
+<br><br/>
 ### Custom allocator
 
-> You can specify the parameters of the allocator by giving the allocator constructor a custom allocator.
+> You can specify the parameters of the allocator by giving the allocator constructor a custom allocator struct.
 
 > Note that sending in a custom allocator is optional. The default is one pool of 24 objects.
 ```c++
@@ -18,21 +35,6 @@ customAlloc.poolCount = 1;
 
 // Number of objects per pool
 customAlloc.poolSize = 24;
-```
 
-<br><br/>
-### Using the allocator
-
-> You can pull objects from the pool using the create/destroy functions.
-
-> Note that the constructor and destructor are called internally.
-```c++
 PoolAllocator<T> pool( customAlloc );
-
-// Create and return a pointer to an object in the pool.
-T* newObject = pool.Create();
-
-// Free a pointer to an object in the pool.
-pool.Destroy(newObject);
-
 ```
