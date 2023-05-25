@@ -27,7 +27,6 @@ pool.Destroy(newObject);
 
 > Note that sending in a custom allocator is optional. The default is one pool of 24 objects.
 ```c++
-// Custom allocator
 CustomAllocator customAlloc;
 
 // Number of pools to pre-allocate
