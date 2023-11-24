@@ -1,7 +1,7 @@
 //
 // Custom allocator pool class
 //
-// Author: David Penning
+// Author: SniperChicken
 
 #ifndef _POOL_ALLOCATOR_SUPPORT__
 #define _POOL_ALLOCATOR_SUPPORT__
@@ -13,8 +13,8 @@
 //
 // Configuration
 
-//#define  ENABLE_CONSOLE_DEBUG__
-//#define  ENABLE_DEBUG_DETAILS__
+#define  ENABLE_CONSOLE_DEBUG__
+#define  ENABLE_DEBUG_DETAILS__
 //#define  ENABLE_LEAK_DETECTION__
 
 //#define  ENABLE_DEBUG_ON_CONSTRUCT__
@@ -33,7 +33,7 @@
  #include <string>
 #endif
 
-struct CustomAllocator {
+struct __declspec(dllexport) CustomAllocator {
     
     /** Initial number of pools.*/
     int poolSize;
@@ -43,7 +43,7 @@ struct CustomAllocator {
     
 };
 
-template<typename T> class PoolAllocator {
+template<typename T> class __declspec(dllexport) PoolAllocator {
     
     std::vector< std::pair<T*, std::vector<bool>> > m_pool;
     std::vector< T* > m_activeList;
@@ -267,9 +267,9 @@ public:
                         
                         // Object is active, add to list
                         int ListSize = m_activeList.size();
-                        for (int i=0; i < ListSize; i++) {
+                        for (int a=0; a < ListSize; a++) {
                             
-                            if (m_activeList[i] == objectPtr) {m_activeList.erase( m_activeList.begin() + i ); break;}
+                            if (m_activeList[a] == objectPtr) {m_activeList.erase( m_activeList.begin() + a ); break;}
                             
                         }
                         
@@ -286,7 +286,9 @@ public:
     }
     
     /** Returns the number of active objects.*/
-    int Size(void) {return m_activeList.size();}
+    int Size(void) {
+        return m_activeList.size();
+    }
     
     
     /** Returns the number of used memory locations.*/
@@ -330,10 +332,10 @@ public:
             
             // Iterate the pool its self
             int poolSz = this ->m_poolSz;
-            for (int i=0; i < poolSz; i++) {
+            for (int a=0; a < poolSz; a++) {
                 
                 // Check if the object is inactive
-                if (!boolPtr[i]) FreeCount++;
+                if (!boolPtr[a]) FreeCount++;
                 
             }
             
